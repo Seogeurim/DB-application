@@ -15,6 +15,31 @@ MongoClient.connect(
 
         const db = database.db(dbName);
 
+        db.collection('student').drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log("Student Collection deleted");
+        });
+
+        db.collection('instructor').drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log("Instructor Collection deleted");
+        });
+
+        db.collection('section').drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log("Section Collection deleted");
+        });
+
+        db.collection('course').drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log("Course Collection deleted");
+        });
+
+        db.collection('takes').drop(function(err, delOK) {
+            if (err) throw err;
+            if (delOK) console.log("Takes Collection deleted");
+        });
+
         db.createCollection('student', function(err, res) {
             if (err) throw err;
             console.log("Collection [student] created!");
@@ -40,17 +65,11 @@ MongoClient.connect(
             console.log("Collection [takes] created!");
         });
 
-        db.collection('student').remove();
-        db.collection('instructor').remove();
-        db.collection('section').remove();
-        db.collection('course').remove();
-        db.collection('takes').remove();
-
         /* INSERT DATA INTO COLLECTION */
         exports.insertData = (collectionName, document) => {
             db.collection(collectionName).insertOne(document, function(err, res) {
                 if (err) throw err;
-                console.log("1 document inserted");
+                // console.log("1 document inserted");
             });
         }
 });
